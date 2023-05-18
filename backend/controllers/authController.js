@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken"); // Importar jsonwebtoken para crear tokens 
 // Controlador para registrar un nuevo usuario
 exports.register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     // Verificar si el correo electrónico ya está registrado
     const existingUser = await User.findOne({ email });
@@ -18,6 +18,7 @@ exports.register = async (req, res) => {
 
     // Crear un nuevo usuario
     const user = new User({
+      name,
       email,
       password: hashedPassword,
     });
@@ -35,7 +36,7 @@ exports.register = async (req, res) => {
 // Controlador para iniciar sesión
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     // Buscar al usuario correspondiente al correo electrónico
     const user = await User.findOne({ email });

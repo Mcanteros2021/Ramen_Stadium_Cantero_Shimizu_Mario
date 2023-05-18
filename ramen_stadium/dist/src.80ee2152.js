@@ -168,11 +168,23 @@ function reloadCSS() {
   }, 50);
 }
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"index.scss":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../node_modules/slick-carousel/slick/slick.css":[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/slick-carousel/slick/slick-theme.css":[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"./ajax-loader.gif":[["ajax-loader.cc27c798.gif","../node_modules/slick-carousel/slick/ajax-loader.gif"],"../node_modules/slick-carousel/slick/ajax-loader.gif"],"./fonts\\slick.eot":[["slick.964f802c.eot","../node_modules/slick-carousel/slick/fonts/slick.eot"],"../node_modules/slick-carousel/slick/fonts/slick.eot"],"./fonts\\slick.woff":[["slick.9e7373ff.woff","../node_modules/slick-carousel/slick/fonts/slick.woff"],"../node_modules/slick-carousel/slick/fonts/slick.woff"],"./fonts\\slick.ttf":[["slick.20ed192c.ttf","../node_modules/slick-carousel/slick/fonts/slick.ttf"],"../node_modules/slick-carousel/slick/fonts/slick.ttf"],"./fonts\\slick.svg":[["slick.12cb16a7.svg","../node_modules/slick-carousel/slick/fonts/slick.svg"],"../node_modules/slick-carousel/slick/fonts/slick.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"C:\\Users\\cante\\Desktop\\Ramen_Stadium_Cantero_Shimizu_Mario\\ramen_stadium\\node_modules\\slick-carousel\\slick\\slick.css":"../node_modules/slick-carousel/slick/slick.css","C:\\Users\\cante\\Desktop\\Ramen_Stadium_Cantero_Shimizu_Mario\\ramen_stadium\\node_modules\\slick-carousel\\slick\\slick-theme.css":"../node_modules/slick-carousel/slick/slick-theme.css","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -197,7 +209,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57691" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51577" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
