@@ -7,6 +7,7 @@ const dishSchema = new Schema({
     parts: [{ type: Schema.Types.ObjectId, ref: 'Tutorial' }],
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     spicinessLevel: { type: String },
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 });
 
 module.exports = mongoose.model('Dish', dishSchema);

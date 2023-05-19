@@ -4,7 +4,11 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  profile_img: { type: String },
+    role: { type: String, enum: ['USER', 'ADMIN'], default: 'USER' },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+  dishes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Dish' }],
 });
 
 // Middleware para cifrar la contraseña antes de guardarla en la base de datos
