@@ -8,7 +8,7 @@ const { login } = require('./controllers/authController');
 // Define la ruta de inicio de sesión
 router.post('/login', async (req, res) => {
   try {
-    const {email, password } = req.body;
+    const {email, password} = req.body;
     const user = await login(email, password); // llama a la función de controlador de inicio de sesión
     res.json(user);
   } catch (error) {

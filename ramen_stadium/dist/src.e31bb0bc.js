@@ -62219,6 +62219,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 require("./Tab.scss");
+var _reactRouterDom = require("react-router-dom");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 const Tab = () => {
@@ -62231,20 +62232,46 @@ const Tab = () => {
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: `tab-item ${activeTab === 0 ? 'active' : ''}`,
     onClick: () => handleTabClick(0)
-  }, "Crear Platos"), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.NavLink, {
+    className: "text-decoration-none link-dark",
+    to: "/creador_de_platos"
+  }, "Crear platos")), /*#__PURE__*/_react.default.createElement("div", {
     className: `tab-item ${activeTab === 1 ? 'active' : ''}`,
     onClick: () => handleTabClick(1)
-  }, "Mis Platos"), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.NavLink, {
+    className: "text-decoration-none link-dark",
+    to: "/"
+  }, "Mi Plato")), /*#__PURE__*/_react.default.createElement("div", {
     className: `tab-item ${activeTab === 2 ? 'active' : ''}`,
     onClick: () => handleTabClick(2)
-  }, "Antes de Empezar"), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.NavLink, {
+    className: "text-decoration-none link-dark",
+    to: "/"
+  }, "Antes de empezar")), /*#__PURE__*/_react.default.createElement("div", {
     className: `tab-item ${activeTab === 3 ? 'active' : ''}`,
     onClick: () => handleTabClick(3)
-  }, "Mi Cuenta"));
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.NavLink, {
+    className: "text-decoration-none link-dark",
+    to: "/"
+  }, "Mi Cuenta")));
 };
 var _default = Tab;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Tab.scss":"components/Tab/Tab.scss"}],"App.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Tab.scss":"components/Tab/Tab.scss","react-router-dom":"../node_modules/react-router-dom/dist/index.js"}],"pages/Plates_creation/Plates_creation.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _react = _interopRequireDefault(require("react"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+const Plates_creation = () => {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, "Plates_creation"));
+};
+var _default = Plates_creation;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -62260,6 +62287,7 @@ var _About_us = _interopRequireDefault(require("./pages/about_us/About_us"));
 var _History = _interopRequireDefault(require("./pages/history/History"));
 var _welcome = _interopRequireDefault(require("./components/Welcome/welcome"));
 var _Tab = _interopRequireDefault(require("./components/Tab/Tab"));
+var _Plates_creation = _interopRequireDefault(require("./pages/Plates_creation/Plates_creation"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -62277,7 +62305,7 @@ const App = () => {
     isLoggedIn: isLoggedIn,
     handleLogin: handleLogin,
     handleLogout: handleLogout
-  }), isLoggedIn && /*#__PURE__*/_react.default.createElement(_welcome.default, null), isLoggedIn && /*#__PURE__*/_react.default.createElement(_Tab.default, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Routes, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }), /*#__PURE__*/_react.default.createElement(_Tab.default, null), isLoggedIn && /*#__PURE__*/_react.default.createElement(_welcome.default, null), isLoggedIn && /*#__PURE__*/_react.default.createElement(_Tab.default, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Routes, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/",
     element: /*#__PURE__*/_react.default.createElement(_HomePage.default, null)
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
@@ -62286,11 +62314,23 @@ const App = () => {
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/historia_ramen",
     element: /*#__PURE__*/_react.default.createElement(_History.default, null)
+  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/creador_de_platos",
+    element: /*#__PURE__*/_react.default.createElement(_Plates_creation.default, null)
+  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/",
+    element: /*#__PURE__*/_react.default.createElement(_HomePage.default, null)
+  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/",
+    element: /*#__PURE__*/_react.default.createElement(_HomePage.default, null)
+  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/",
+    element: /*#__PURE__*/_react.default.createElement(_HomePage.default, null)
   }))), /*#__PURE__*/_react.default.createElement(_Copyright.default, null));
 };
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js","./pages/home/HomePage":"pages/home/HomePage.jsx","./components/NavBar/NavBar":"components/NavBar/NavBar.jsx","./components/Copyright/Copyright":"components/Copyright/Copyright.jsx","./pages/about_us/About_us":"pages/about_us/About_us.jsx","./pages/history/History":"pages/history/History.jsx","./components/Welcome/welcome":"components/Welcome/welcome.jsx","./components/Tab/Tab":"components/Tab/Tab.jsx"}],"../node_modules/bootstrap/dist/css/bootstrap.min.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js","./pages/home/HomePage":"pages/home/HomePage.jsx","./components/NavBar/NavBar":"components/NavBar/NavBar.jsx","./components/Copyright/Copyright":"components/Copyright/Copyright.jsx","./pages/about_us/About_us":"pages/about_us/About_us.jsx","./pages/history/History":"pages/history/History.jsx","./components/Welcome/welcome":"components/Welcome/welcome.jsx","./components/Tab/Tab":"components/Tab/Tab.jsx","./pages/Plates_creation/Plates_creation":"pages/Plates_creation/Plates_creation.jsx"}],"../node_modules/bootstrap/dist/css/bootstrap.min.css":[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -62337,7 +62377,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61681" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63156" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

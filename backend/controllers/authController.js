@@ -33,29 +33,30 @@ exports.register = async (req, res) => {
   }
 };
 
-// Controlador para iniciar sesión
 exports.login = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
-    // Buscar al usuario correspondiente al correo electrónico
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: "No se encontró el usuario" });
     }
 
-    // Comparar la contraseña enviada con la contraseña cifrada almacenada en la base de datos
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
+    // Compare la contraseña proporcionada con la almacenada
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log(password)
+    console.log(user.password)
+    if (!isMatch) {
       return res.status(401).json({ message: "Credenciales inválidas" });
     }
 
-    // Crear un token de autenticación
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    // Si las contraseñas coinciden, crea un token JWT
 
-    res.status(200).json({ token });
+
+    res.status(200).json({ success: true, message: "Inicio de sesión exitoso" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error al iniciar sesión" });
   }
 };
+

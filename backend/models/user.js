@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   profile_img: { type: String },
-    role: { type: String, enum: ['USER', 'ADMIN'], default: 'USER' },
+  role: { type: String, enum: ['USER', 'ADMIN'], default: 'USER' },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   dishes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Dish' }],
 });
@@ -32,5 +32,7 @@ userSchema.methods.comparePassword = function (candidatePassword, cb) {
     cb(null, isMatch);
   });
 };
+
+
 
 module.exports = mongoose.model('User', userSchema);
