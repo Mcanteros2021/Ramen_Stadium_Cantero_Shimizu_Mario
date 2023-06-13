@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importar el modelo de usuario
-const User = require('./models/User');
+const User = require('../models/user');
 
 // Obtener un usuario por su ID
 router.get('/users/:id', async (req, res) => {
@@ -44,6 +44,21 @@ router.put('/users/:id', async (req, res) => {
         res.status(500).json({ error: 'Error del servidor' });
     }
 });
+
+// Obtener usuario por su correo //
+router.get('/user', async (req, res) => {
+    try {
+        const email = req.query.email;
+        const user = await User.findOne({ email }); // Busca el usuario por correo electrónico
+        if (!user) {
+            throw new Error('No existe un usuario con ese correo electrónico');
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
 
 module.exports = router;
 

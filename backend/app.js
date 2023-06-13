@@ -25,8 +25,16 @@ db.once("open", () => {
 
 // Routes
 const authRoutes = require("./routes/auth");
+const usersRoutes = require("./routes/user_route");
+const dishRoutes = require("./routes/dish_route");
+const imageRoute = require('./routes/imageRoute');
+const tutorialRoute = require('./routes/tutorial_route');
 
+app.use("/api", dishRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api", usersRoutes);
+app.use('/api/images', imageRoute);
+app.use('/api', tutorialRoute);
 
 // Start server
 app.listen(PORT, () => {

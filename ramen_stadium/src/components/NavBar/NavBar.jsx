@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import Nav from 'react-bootstrap/Nav'
 import "./NavBar.scss"
 import { NavLink } from "react-router-dom";
@@ -6,10 +6,12 @@ import ReactModal from 'react-modal';
 import Login from "../login/Login";
 import Register from "../Register/Register";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { UserContext } from "../../context/UserContext";
 
 ReactModal.setAppElement('#root');
 
-const NavBar = ({ isLoggedIn, handleLogin, handleLogout }) => {
+const NavBar = () => {
+  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalIsOpenRegister, setModalIsOpenRegister] = useState(false);
 
@@ -29,6 +31,9 @@ const NavBar = ({ isLoggedIn, handleLogin, handleLogout }) => {
     setModalIsOpenRegister(false);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
   return (
       <div id="navBarBackground" className={"d-flex flex-fill flex-column align-items-center justify-content-center w-100"}>
         <div>
@@ -41,13 +46,13 @@ const NavBar = ({ isLoggedIn, handleLogin, handleLogout }) => {
           <div className="w-75">
             <Nav fill variant="tabs" defaultActiveKey="/" >
               <Nav.Item>
-                <NavLink to="/" className="nav-link" activeClassName="active">Inicio</NavLink>
+                <NavLink to="/" className="nav-link text-center" activeClassName="active">Inicio</NavLink>
               </Nav.Item>
               <Nav.Item>
-                <NavLink to="/sobre_nosotros" className="nav-link" activeClassName="active">Sobre Nosotros</NavLink>
+                <NavLink to="/sobre_nosotros" className="nav-link text-center" activeClassName="active">Sobre Nosotros</NavLink>
               </Nav.Item>
               <Nav.Item>
-                <NavLink to="/historia_ramen" className="nav-link" activeClassName="active">Historia del Ramen</NavLink>
+                <NavLink to="/historia_ramen" className="nav-link text-center" activeClassName="active">Historia del Ramen</NavLink>
               </Nav.Item>
             </Nav>
           </div>
@@ -118,7 +123,7 @@ const NavBar = ({ isLoggedIn, handleLogin, handleLogout }) => {
                       overlayClassName="ReactModal__Overlay"
                       className="ReactModal__Content"
                   >
-                    <Login handleLogin={handleLogin} closeModal={closeModal} />
+                    <Login closeModal={closeModal} />
                   </ReactModal>
 
                   <ReactModal

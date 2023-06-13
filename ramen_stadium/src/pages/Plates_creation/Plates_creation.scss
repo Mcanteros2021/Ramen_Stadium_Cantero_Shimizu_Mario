@@ -1,0 +1,21 @@
+.form-container {
+  width: 90%;
+
+  margin: auto;
+  padding: 0 15px;
+}
+
+.option-img {
+  width: 18%;
+  height: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option-img:hover {
+  transform: scale(1.1);
+}
+
+.option-img-selected {
+  border: 0.5em solid #32a852;
+}

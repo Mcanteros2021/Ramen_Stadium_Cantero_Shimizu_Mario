@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
+import { UserContext } from '../../context/UserContext';
 import {
     MDBBtn,
     MDBContainer,
@@ -12,7 +13,8 @@ import {
 } from 'mdb-react-ui-kit';
 import axios from 'axios';
 
-const Login = ({ handleLogin, closeModal }) => {
+const Login = ({ closeModal }) => {
+    const { setUser, setIsLoggedIn } = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -21,15 +23,14 @@ const Login = ({ handleLogin, closeModal }) => {
 
         try {
             const response = await axios.post('http://localhost:4800/api/auth/login', { email, password });
-            handleLogin(); // Llama a la función handleLogin del componente NavBar
+            const userResponse = await axios.get(`http://localhost:4800/api/user?email=${email}`);
             closeModal(); // Cierra el modal
-            // Realiza alguna acción adicional después de un inicio de sesión exitoso
+            setUser(userResponse.data);
+            setIsLoggedIn(true);
             console.log('Inicio de sesión exitoso:', response.data);
-            // Realiza alguna acción adicional después de un inicio de sesión exitoso
-
+            console.log("Usuario:", userResponse.data);
         } catch (error) {
             console.log('Error de inicio de sesión:', error.response.data);
-            // Realiza alguna acción adicional en caso de un error de inicio de sesión
         }
     };
 

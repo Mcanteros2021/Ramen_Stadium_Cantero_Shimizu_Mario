@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 import "./welcome.scss";
 import defaultURL from "../../assets/images/profile.png";
+
 const Welcome = () => {
+    const contextValue  = useContext(UserContext);
+    console.log(contextValue);
+
+    const { user } = contextValue;
     return (
         <div className="component">
             <div className="edit-img">
@@ -14,11 +20,11 @@ const Welcome = () => {
             </div>
 
 
-                <div className="profile-picture">
-                    <img src={defaultURL} alt="Profile" className="profile-image" />
-                </div>
+            <div className="profile-picture">
+                <img src={defaultURL} alt="Profile" className="profile-image" />
+            </div>
 
-                <h1>Bienvenido Mario</h1>
+            <h1>Bienvenido {user ? user.name : ''}</h1>
 
         </div>
     );

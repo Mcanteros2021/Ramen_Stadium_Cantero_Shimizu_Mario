@@ -10,30 +10,30 @@ const Tab = () => {
     };
 
     return (
-        <div className="tab-bar">
+        <div className="tab-bar mb-5">
             <div
                 className={`tab-item ${activeTab === 0 ? 'active' : ''}`}
                 onClick={() => handleTabClick(0)}
             >
-                <NavLink className="text-decoration-none link-dark" to="/creador_de_platos">Crear platos</NavLink>
+                <NavLink className="text-decoration-none link-dark text-center" to="/creador_de_platos">Crear platos</NavLink>
             </div>
             <div
                 className={`tab-item ${activeTab === 1 ? 'active' : ''}`}
                 onClick={() => handleTabClick(1)}
             >
-                <NavLink className="text-decoration-none link-dark" to="/mis_platos">Mi Plato</NavLink>
+                <NavLink className="text-decoration-none link-dark text-center" to="/mis_platos">Mi Plato</NavLink>
             </div>
             <div
                 className={`tab-item ${activeTab === 2 ? 'active' : ''}`}
                 onClick={() => handleTabClick(2)}
             >
-                <NavLink className="text-decoration-none link-dark" to="/antes_de_empezar">Antes de empezar</NavLink>
+                <NavLink className="text-decoration-none link-dark text-center" to="/antes_de_empezar">Antes de empezar</NavLink>
             </div>
             <div
                 className={`tab-item ${activeTab === 3 ? 'active' : ''}`}
                 onClick={() => handleTabClick(3)}
             >
-               <NavLink className="text-decoration-none link-dark" to="/mi_cuenta">Mi Cuenta</NavLink>
+               <NavLink className="text-decoration-none link-dark text-center" to="/mi_cuenta">Mi Cuenta</NavLink>
             </div>
         </div>
     );
