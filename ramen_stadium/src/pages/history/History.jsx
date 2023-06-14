@@ -46,7 +46,7 @@ const History = () =>{
             <Slider {...settings}>
                 {images.map((image, index) => (
                     <div className={"d-flex justify-content-center align-items-center "}  key={index}>
-                        <img className="w-100 h-100" src={image} alt={`Imagen ${index + 1}`} />
+                        <img className="w-75 h-75" src={image} alt={`Imagen ${index + 1}`} />
                     </div>
                 ))}
             </Slider>

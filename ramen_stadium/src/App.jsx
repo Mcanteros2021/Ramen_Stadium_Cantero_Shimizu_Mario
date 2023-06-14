@@ -35,7 +35,7 @@ const App = () => {
                         <Route path="/creador_de_platos" element={<Plates_creation />} />
                         <Route path="/panel_admin" element={<Panel_admin />} />
                         <Route path="/antes_de_empezar" element={<Before_starting />} />
-                        <Route path="/mis_platos" element={<Panel_admin />} />
+                        <Route path="/mis_platos" element={<My_plates/>} />
                         <Route path="/tutorial" element={<TutorialIndex/>}></Route>
                     </Routes>
                 </BrowserRouter>
