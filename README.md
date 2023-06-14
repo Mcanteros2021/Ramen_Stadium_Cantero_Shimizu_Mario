@@ -4,7 +4,7 @@
 #### Autor: Mario Cantero Shimizu(https://github.com/Mcanteros2021)
 #### Tutor: Chema Durán(https://github.com/chemaduran)
 #### Fecha de Inicio: 26-03-2023
-#### Fecha de Finalización: DD-MM-YYYY
+#### Fecha de Finalización: 14-06-2023
 
 ## Descripción del proyecto
 
@@ -20,8 +20,8 @@ La idea es atraer a los usuarios de la página creando una plataforma donde ello
 El proyecto se compondrá de una una parte de frontend que trabajaré con el framework de React y otra con una API REST con Express.
 Por el momento mi proyecto se dividirá de esta forma:
 
-- src-api
-- src-frontend
+- backend
+- ramen_stadium
 - docs
 - README.md
 
