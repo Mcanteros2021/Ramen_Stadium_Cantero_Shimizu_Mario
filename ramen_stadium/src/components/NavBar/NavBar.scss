@@ -36,3 +36,9 @@
 #registerPointer{
   cursor: pointer;
 }
+.link-opacity-75-hover {
+  &:hover {
+    opacity: 0.75;
+  }
+}
+

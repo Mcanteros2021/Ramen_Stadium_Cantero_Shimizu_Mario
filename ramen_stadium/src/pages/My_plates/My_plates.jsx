@@ -1,20 +1,64 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { MDBCol, MDBInput } from "mdbreact";
 import './My_plates.scss';
 import Plate from "../../components/Plate/Plate";
+import axios from "axios";
+import { UserContext } from "../../context/UserContext";
 
 const My_plates = () => {
-
+    const contextValue  = useContext(UserContext);
+    const { user } = contextValue;
+    const [plates, setPlates] = useState([]);
     const [activeTab, setActiveTab] = useState(0);
+    const [search, setSearch] = useState('');
+    const [filteredPlates, setFilteredPlates] = useState([]);
 
     const handleTabClick = (tabIndex) => {
         setActiveTab(tabIndex);
     };
 
+    useEffect(() => {
+        if (user) {
+            // Obtener los platos del usuario actual desde la API
+            axios
+                .get(`http://localhost:4800/api/users/${user._id}/plates`)
+                .then((response) => {
+                    setPlates(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    }, [user]);
+
+    useEffect(() => {
+        // Filtrado por búsqueda
+        let newPlates = plates.filter(plate =>
+            plate.name.toLowerCase().includes(search.toLowerCase())
+        );
+
+        // Filtrado por favoritos
+        if (activeTab === 0) {
+            newPlates = newPlates.filter(plate => plate.favourite);
+        }
+
+        // Ordenación
+        if (activeTab === 1) {
+            // Ordenación por fecha (de más reciente a más antiguo)
+            newPlates.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } else if (activeTab === 2) {
+            // Ordenación por valoración (de mayor a menor)
+            newPlates.sort((a, b) => b.rate - a.rate);
+        }
+
+        setFilteredPlates(newPlates);
+    }, [search, plates, activeTab]);
+
+
     return (
         <div className="d-flex justify-content-center align-items-center flex-column w-100">
             <MDBCol md="6">
-                <MDBInput hint="Search" type="text" containerClass="mt-0" />
+                <MDBInput hint="Search" type="text" containerClass="mt-0" onChange={event => setSearch(event.target.value)} />
             </MDBCol>
             <div className="tab-bar w-100">
                 <div
@@ -50,17 +94,13 @@ const My_plates = () => {
                             d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828l.645-1.937zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.734 1.734 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.734 1.734 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.734 1.734 0 0 0 3.407 2.31l.387-1.162zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L10.863.1z"/>
                     </svg>
                 </div>
-
             </div>
-        <div className="w-100 h-75 justify-content-center d-flex align-items-center flex-column">
-            <Plate></Plate>
-            <Plate></Plate>
-            <Plate></Plate>
+            <div className="w-100 h-75 justify-content-center d-flex align-items-center flex-column">
+                {filteredPlates.map((plate) => (
+                    <Plate key={plate._id} plate={plate} />
+                ))}
+            </div>
         </div>
-
-        </div>
-
-
     );
 }
 

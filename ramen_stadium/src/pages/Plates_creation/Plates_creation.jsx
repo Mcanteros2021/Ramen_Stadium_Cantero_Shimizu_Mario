@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import axios from "axios";
 import "./Plates_creation.scss";
+import { UserContext } from "../../context/UserContext";
+import { useHistory } from "react-router-dom";
 
 const Plates_creation = () => {
+
+    const contextValue  = useContext(UserContext);
+    console.log(contextValue);
+    const { user } = contextValue;
+
     const [titulo, setTitulo] = useState("");
     const [caldo, setCaldo] = useState("");
     const [carnes, setCarnes] = useState([]);
@@ -28,32 +36,59 @@ const Plates_creation = () => {
     ];
     const fideosImages = [
         { id: "64862a011f283d488115e050", image: "http://localhost:4800/api/images/fideo_icon.png" },
-        { id: "64862a011f283d488115e050", image: "http://localhost:4800/api/images/fideo_icon_null.png" },
+        { id: "", image: "http://localhost:4800/api/images/fideo_icon_null.png" },
     ];
     const ramenImages = [
-        { id: "64862a011f283d488115e050", image: "http://localhost:4800/api/images/icono_1.png" },
-        { id: "64862a011f283d488115e050", image: "http://localhost:4800/api/images/icono_2.png" },
-        { id: "64862a011f283d488115e050", image: "http://localhost:4800/api/images/icono_3.png" },
-        { id: "64862a011f283d488115e050", image: "http://localhost:4800/api/images/icono_4.png" },
-        { id: "64862a011f283d488115e050", image: "http://localhost:4800/api/images/icono_5.png" },
+        { id: "http://localhost:4800/api/images/icono_1.png", image: "http://localhost:4800/api/images/icono_1.png" },
+        { id: "http://localhost:4800/api/images/icono_2.png", image: "http://localhost:4800/api/images/icono_2.png" },
+        { id: "http://localhost:4800/api/images/icono_3.png", image: "http://localhost:4800/api/images/icono_3.png" },
+        { id: "http://localhost:4800/api/images/icono_4.png", image: "http://localhost:4800/api/images/icono_4.png" },
+        { id: "http://localhost:4800/api/images/icono_5.png", image: "http://localhost:4800/api/images/icono_5.png" },
     ];
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (titulo.trim() === "" || titulo.length > 30) {
-            setError("El título es requerido y debe contener menos de 30 caracteres");
-            return;
+
+        // Obtener los IDs de los tutoriales seleccionados
+        const parts = [...caldosImages, ...carnesImages, ...otrosImages].filter((img) => img.id === caldo || carnes.includes(img.id) || otros.includes(img.id)).map((img) => img.id);
+
+        if (fideos) {
+            parts.push(fideos);
         }
-        if (caldo.trim() === "") {
-            setError("La selección de caldo es obligatoria");
-            return;
-        }
-        if (fideos.trim() === "") {
-            setError("La selección de fideos es obligatoria");
-            return;
-        }
-        setError("");
-        console.log({ titulo, caldo, carnes, otros, fideos, descripcion });
+
+        // Realizar la solicitud POST al servidor para crear el plato
+        axios
+            .post("http://localhost:4800/api/dish", {
+                name: titulo,
+                parts,
+                createdBy: user._id,
+                description: descripcion,
+                icono_ramen: ramen,
+                favorite: false,
+                rate: 0,
+                date: new Date(),
+            })
+            .then((response) => {
+                // Obtener el ID del plato creado
+                const dishId = response.data._id;
+
+                console.log(dishId)
+                // Realizar la solicitud POST al servidor para añadir el plato al usuario
+                axios
+                    .post(`http://localhost:4800/api/users/${user._id}/add-dish`, { dishId })
+                    .then((response) => {
+                        console.log(response.data);
+                        history.push("/mis_platos");
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        setError("Error al añadir el plato al usuario. Por favor, intenta nuevamente.");
+                    });
+            })
+            .catch((error) => {
+                console.error(error);
+                setError("Error al crear el plato. Por favor, intenta nuevamente.");
+            });
     };
 
     return (
@@ -136,12 +171,12 @@ const Plates_creation = () => {
                 </div>
                 <h1 className="text-center mt-5 mb-5">DESCRIPCIÓN</h1>
                 <div className="form-group">
-          <textarea
-              value={descripcion}
-              onChange={(e) => setDescripcion(e.target.value)}
-              placeholder="Descripción del plato"
-              className="form-control mb-3"
-          />
+                    <textarea
+                        value={descripcion}
+                        onChange={(e) => setDescripcion(e.target.value)}
+                        placeholder="Descripción del plato"
+                        className="form-control mb-3"
+                    />
                 </div>
                 <div className="form-group text-center">
                     <button type="submit" className="btn btn-primary">

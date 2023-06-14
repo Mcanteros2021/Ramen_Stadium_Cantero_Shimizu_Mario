@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
     }
 
     // Cifrar la contraseña
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Crear un nuevo usuario
     const user = new User({
@@ -43,20 +43,22 @@ exports.login = async (req, res) => {
     }
 
     // Compare la contraseña proporcionada con la almacenada
-    const isMatch = await bcrypt.compare(password, user.password);
-    console.log(password)
-    console.log(user.password)
-    if (!isMatch) {
-      return res.status(401).json({ message: "Credenciales inválidas" });
-    }
+    user.comparePassword(password, (err, isMatch) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Error al comparar contraseñas" });
+      }
 
-    // Si las contraseñas coinciden, crea un token JWT
+      if (!isMatch) {
+        return res.status(401).json({ message: "Credenciales inválidas" });
+      }
 
-
-    res.status(200).json({ success: true, message: "Inicio de sesión exitoso" });
+      res.status(200).json({ success: true, message: "Inicio de sesión exitoso" });
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error al iniciar sesión" });
   }
 };
+
 

@@ -5,8 +5,6 @@ import defaultURL from "../../assets/images/profile.png";
 
 const Welcome = () => {
     const contextValue  = useContext(UserContext);
-    console.log(contextValue);
-
     const { user } = contextValue;
     return (
         <div className="component">

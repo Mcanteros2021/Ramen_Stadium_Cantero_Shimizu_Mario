@@ -27,8 +27,8 @@ const HomePage = () => {
           <h1 className={"mb-5"}><strong>Prueba y aprende como hacer ...</strong></h1>
 
         <div>
-            <img className="" src={imageHomeLeft} alt="imagen de ramen home derecha "></img>
-            <img className="" src={imageHomeRight} alt="imagen de ramen home izquierda "></img>
+            <img className="w-100 h-100" src={imageHomeLeft} alt="imagen de ramen home derecha "></img>
+            <img className="w-100 h-100" src={imageHomeRight} alt="imagen de ramen home izquierda "></img>
         </div>
 
 

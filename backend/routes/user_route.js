@@ -58,6 +58,56 @@ router.get('/user', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+// Añadir un plato al array de platos del usuario
+router.post('/users/:id/add-dish', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const dishId = req.body.dishId;
+
+        // Buscar el usuario por su ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        // Añadir el plato al array de platos del usuario
+        user.dishes.push(dishId);
+
+        // Guardar los cambios
+        const updatedUser = await user.save();
+
+        res.json(updatedUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+});
+router.get('/users/:id/plates', async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        // Buscar el usuario por su ID y poblar el campo 'dishes' con los datos de los platos
+        const user = await User.findById(userId).populate('dishes');
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        res.json(user.dishes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+});
+// Obtener todos los usuarios
+router.get('/users', async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+});
 
 
 module.exports = router;

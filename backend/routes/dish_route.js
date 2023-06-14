@@ -73,5 +73,31 @@ router.delete('/dish/:id', (req, res) => {
         })
         .catch((error) => res.status(400).json({ error }));
 });
+router.put('/dish/:id/favorite', (req, res) => {
+    const { id } = req.params;
+    const { favourite } = req.body;
+    Dish.findByIdAndUpdate(id, { favourite }, { new: true })
+        .then((dish) => {
+            if (!dish) {
+                return res.status(404).json({ error: 'Plato no encontrado' });
+            }
+            res.json(dish);
+        })
+        .catch((error) => res.status(400).json({ error }));
+});
+
+// Ruta para cambiar el rating de un plato
+router.put('/dish/:id/rating', (req, res) => {
+    const { id } = req.params;
+    const { rate } = req.body;
+    Dish.findByIdAndUpdate(id, { rate }, { new: true })
+        .then((dish) => {
+            if (!dish) {
+                return res.status(404).json({ error: 'Plato no encontrado' });
+            }
+            res.json(dish);
+        })
+        .catch((error) => res.status(400).json({ error }));
+});
 
 module.exports = router;

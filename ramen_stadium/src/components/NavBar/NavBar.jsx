@@ -1,11 +1,11 @@
-import React, {useContext, useState} from "react";
-import Nav from 'react-bootstrap/Nav'
-import "./NavBar.scss"
+import React, { useContext, useState } from "react";
+import Nav from 'react-bootstrap/Nav';
+import "./NavBar.scss";
 import { NavLink } from "react-router-dom";
 import ReactModal from 'react-modal';
 import Login from "../login/Login";
 import Register from "../Register/Register";
-import Dropdown from 'react-bootstrap/Dropdown';
+import Button from '@mui/material/Button';
 import { UserContext } from "../../context/UserContext";
 
 ReactModal.setAppElement('#root');
@@ -33,9 +33,11 @@ const NavBar = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    closeModalRegister(); // Cerrar el modal de registro al cerrar sesión
   };
+
   return (
-      <div id="navBarBackground" className={"d-flex flex-fill flex-column align-items-center justify-content-center w-100"}>
+      <div id="navBarBackground" className="d-flex flex-fill flex-column align-items-center justify-content-center w-100">
         <div>
           <h1 id="title" className="mt-4">
             RAMEN STADIUM
@@ -44,7 +46,7 @@ const NavBar = () => {
 
         <div className="d-flex w-100 align-items-center">
           <div className="w-75">
-            <Nav fill variant="tabs" defaultActiveKey="/" >
+            <Nav fill variant="tabs" defaultActiveKey="/">
               <Nav.Item>
                 <NavLink to="/" className="nav-link text-center" activeClassName="active">Inicio</NavLink>
               </Nav.Item>
@@ -60,35 +62,7 @@ const NavBar = () => {
           <div className="d-flex justify-content-center w-25 flex-column align-items-center">
             {isLoggedIn ? (
                 <div className="d-flex justify-content-evenly w-75 align-items-center">
-                  <Dropdown>
-                    <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                      ¿Qué quieres hacer?
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu variant="dark">
-                      <Dropdown.Item href="#/action-1">Antes de empezar</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">Crear Plato</Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">Mis platos</Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">Mi Cuenta</Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item onClick={handleLogout}>Cerrar Sesión</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-
-                  <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="28"
-                      fill="currentColor"
-                      className="pe-auto bi bi-person-circle"
-                      viewBox="0 0 16 16"
-                  >
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path
-                        fillRule="evenodd"
-                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-                    />
-                  </svg>
+                  <Button onClick={handleLogout} variant="text">Cerrar Sesión</Button>
                 </div>
             ) : (
                 <div className="d-flex justify-content-center flex-column align-items-center">
@@ -100,20 +74,6 @@ const NavBar = () => {
                     <h1>
                       <a>Login</a>
                     </h1>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="28"
-                        fill="currentColor"
-                        className="pe-auto bi bi-person-circle"
-                        viewBox="0 0 16 16"
-                    >
-                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                      <path
-                          fillRule="evenodd"
-                          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-                      />
-                    </svg>
                   </div>
                   <ReactModal
                       isOpen={modalIsOpen}
@@ -129,15 +89,15 @@ const NavBar = () => {
                   <ReactModal
                       isOpen={modalIsOpenRegister}
                       onRequestClose={closeModalRegister}
-                      contentLabel="Login Modal"
+                      contentLabel="Register Modal"
                       shouldCloseOnOverlayClick={true}
                       overlayClassName="ReactModal__Overlay"
                       className="ReactModal__Content"
                   >
-                    <Register />
+                    <Register closeModal={closeModalRegister} openLoginModal={openModal} />
                   </ReactModal>
 
-                  <p>¿Aún no estás registrado?</p>
+                  <p className="text-center">¿Aún no estás registrado?</p>
                   <a
                       id="registerPointer"
                       onClick={openModalRegister}
