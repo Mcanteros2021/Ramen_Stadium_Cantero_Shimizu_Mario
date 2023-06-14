@@ -1,0 +1,16 @@
+{
+  "modules": true,
+  "plugins": {
+    "autoprefixer": {
+      "grid": true
+    },
+    "cssnano": {
+      "preset": [
+        "default",
+        {
+          "svgo": false
+        }
+      ]
+    }
+  }
+}

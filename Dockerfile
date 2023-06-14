@@ -4,6 +4,7 @@ WORKDIR /Ramen_Stadium_Cantero_Shimizu_Mario/ramen_stadium
 COPY ramen_stadium/package*.json ./
 RUN npm install
 COPY ramen_stadium/ .
+COPY .postcssrc ./
 RUN npm run build
 
 # Construir la imagen del backend
