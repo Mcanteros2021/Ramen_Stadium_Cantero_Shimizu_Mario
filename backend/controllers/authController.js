@@ -1,6 +1,5 @@
 const User = require("../models/user"); // Importar modelo de usuario
 const bcrypt = require("bcryptjs"); // Importar bcrypt para cifrar contraseñas
-const jwt = require("jsonwebtoken"); // Importar jsonwebtoken para crear tokens de autenticación
 
 // Controlador para registrar un nuevo usuario
 exports.register = async (req, res) => {
@@ -13,14 +12,11 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: "El correo electrónico ya está registrado" });
     }
 
-    // Cifrar la contraseña
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     // Crear un nuevo usuario
     const user = new User({
       name,
       email,
-      password: hashedPassword,
+      password
     });
 
     // Guardar el usuario en la base de datos
