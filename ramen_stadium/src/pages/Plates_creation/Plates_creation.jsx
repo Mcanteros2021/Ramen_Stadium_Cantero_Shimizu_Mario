@@ -2,13 +2,14 @@ import React, { useState,useContext } from "react";
 import axios from "axios";
 import "./Plates_creation.scss";
 import { UserContext } from "../../context/UserContext";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Plates_creation = () => {
 
     const contextValue  = useContext(UserContext);
     console.log(contextValue);
     const { user } = contextValue;
+    const navigate = useNavigate();
 
     const [titulo, setTitulo] = useState("");
     const [caldo, setCaldo] = useState("");
@@ -78,7 +79,7 @@ const Plates_creation = () => {
                     .post(`http://localhost:4800/api/users/${user._id}/add-dish`, { dishId })
                     .then((response) => {
                         console.log(response.data);
-                        history.push("/mis_platos");
+                        navigate("/mis_platos");
                     })
                     .catch((error) => {
                         console.error(error);
